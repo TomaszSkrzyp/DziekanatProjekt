@@ -13,6 +13,6 @@ public class Prowadzacy {
     @OneToMany(mappedBy = "kierownik")
     private List<Przedmiot> przedmiotyKierowane;
 
-    @OneToMany(mappedBy = "prowadzacy")
-    private List<Zajecia> prowadzoneZajecia;
+    @ManyToMany(mappedBy = "prowadzacy")
+    private List<Przedmiot> przedmioty;
 }

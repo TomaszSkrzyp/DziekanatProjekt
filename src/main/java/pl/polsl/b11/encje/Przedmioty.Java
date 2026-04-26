@@ -12,6 +12,14 @@ public class Przedmiot {
     @JoinColumn(name = "id_kierownika")
     private Prowadzacy kierownik;
 
+    @ManyToMany
+    @JoinTable(
+        name = "PRZEDMIOT_PROWADZACY",
+        joinColumns = @JoinColumn(name = "id_przedmiotu"),
+        inverseJoinColumns = @JoinColumn(name = "id_prowadzacego")
+    )
+    private List<Prowadzacy> prowadzacy;
+
     @ManyToOne
     @JoinColumn(name = "id_kierunku")
     private Kierunek kierunek;
