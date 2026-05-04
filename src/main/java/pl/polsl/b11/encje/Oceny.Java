@@ -7,7 +7,6 @@ public class Ocena {
     private Integer id_oceny;
     
     private Float wartosc;
-
     @ManyToOne
     @JoinColumn(name = "id_studenta")
     private Student student;
@@ -16,10 +15,6 @@ public class Ocena {
     @JoinColumn(name = "id_przedmiotu")
     private Przedmiot przedmiot;
 
-    @ManyToOne
-    @JoinColumn(name = "id_prowadzacego")
-    private Prowadzacy prowadzacy;
-
     @Temporal(TemporalType.DATE)
-    private Date data_wystawienia;
+    private java.util.Date data_wystawienia;
 }
