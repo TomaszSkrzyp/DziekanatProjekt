@@ -8,7 +8,6 @@ public class Prowadzacy {
     
     private String imie;
     private String nazwisko;
-    private String stopien_naukowy;
 
     @OneToMany(mappedBy = "kierownik")
     private List<Przedmiot> przedmiotyKierowane;

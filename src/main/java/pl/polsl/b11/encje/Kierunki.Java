@@ -3,10 +3,7 @@
 @Getter @Setter @NoArgsConstructor
 public class Kierunek {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_kierunku;
-    
-    private String nazwa;
+    private String nazwa_kierunku;
 
     @OneToMany(mappedBy = "kierunek")
     private List<Student> studenci;

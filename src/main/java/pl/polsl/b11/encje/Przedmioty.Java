@@ -21,7 +21,7 @@ public class Przedmiot {
     private List<Prowadzacy> prowadzacy;
 
     @ManyToOne
-    @JoinColumn(name = "id_kierunku")
+    @JoinColumn(name = "nazwa_kierunku")
     private Kierunek kierunek;
 
     @OneToMany(mappedBy = "przedmiot")

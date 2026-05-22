@@ -8,7 +8,7 @@ public class Ocena {
     
     private Float wartosc;
     @ManyToOne
-    @JoinColumn(name = "id_studenta")
+    @JoinColumn(name = "nr_albumu_studenta")
     private Student student;
 
     @ManyToOne
