@@ -1,0 +1,324 @@
+{
+	"info": {
+		"name": "Dziekanat Projekt - Testy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dodaj Kierunek",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/program/kierunki?nazwaKierunku=Informatyka",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"program",
+						"kierunki"
+					],
+					"query": [
+						{
+							"key": "nazwaKierunku",
+							"value": "Informatyka"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dodaj Prowadzacego",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/program/prowadzacy?imie=Jan&nazwisko=Kowalski",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"program",
+						"prowadzacy"
+					],
+					"query": [
+						{
+							"key": "imie",
+							"value": "Jan"
+						},
+						{
+							"key": "nazwisko",
+							"value": "Kowalski"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zarejestruj Studenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/studenci?nrAlbumu=123456&imie=Tomasz&nazwisko=Skrzyp&nazwaKierunku=Informatyka",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"studenci"
+					],
+					"query": [
+						{
+							"key": "nrAlbumu",
+							"value": "123456"
+						},
+						{
+							"key": "imie",
+							"value": "Tomasz"
+						},
+						{
+							"key": "nazwisko",
+							"value": "Skrzyp"
+						},
+						{
+							"key": "nazwaKierunku",
+							"value": "Informatyka"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pobierz Profil Studenta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/studenci/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"studenci",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rejestracja Przedmiotu",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/program/przedmioty?nazwaPrzedmiotu=take&nazwaKierunku=Informatyka&idKierownika=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"program",
+						"przedmioty"
+					],
+					"query": [
+						{
+							"key": "nazwaPrzedmiotu",
+							"value": "take"
+						},
+						{
+							"key": "nazwaKierunku",
+							"value": "Informatyka"
+						},
+						{
+							"key": "idKierownika",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+            "name": "Przypisz Prowadzacego do Przedmiotu",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/program/przedmioty/:idPrzedmiotu/prowadzacy?idProwadzacego=2",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "program",
+                        "przedmioty",
+                        ":idPrzedmiotu",
+                        "prowadzacy"
+                    ],
+                    "query": [
+                        {
+                            "key": "idProwadzacego",
+                            "value": "2"
+                        }
+                    ],
+                    "variable": [
+                        {
+                            "key": "idPrzedmiotu",
+                            "value": ""
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+		{
+			"name": "Wystaw Ocene",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/oceny?nrAlbumu=123456&idPrzedmiotu=1&wartosc=4.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"oceny"
+					],
+					"query": [
+						{
+							"key": "nrAlbumu",
+							"value": "123456"
+						},
+						{
+							"key": "idPrzedmiotu",
+							"value": "1"
+						},
+						{
+							"key": "wartosc",
+							"value": "4.5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pobierz Oceny Studenta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/studenci/123456/oceny",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"studenci",
+						"123456",
+						"oceny"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zmien Wystawiona Ocenę",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/oceny/1?nowaWartosc=5.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"oceny",
+						"1"
+					],
+					"query": [
+						{
+							"key": "nowaWartosc",
+							"value": "5.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pobierz Srednia Studenta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/oceny/student/123456/srednia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"oceny",
+						"student",
+						"123456",
+						"srednia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pobierz Srednia z Przedmiotu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/oceny/przedmiot/1/srednia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"oceny",
+						"przedmiot",
+						"1",
+						"srednia"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
