@@ -23,25 +23,7 @@ public class StudentService {
 
     private final OcenaRepository ocenaRepository;
 
-    // Scenariusz 1.1: Rejestracja nowego studenta i przypisanie do kierunku
-    @Transactional
-public Student zarejestrujStudenta(String nrAlbumu, String imie, String nazwisko, String nazwaKierunku) {
-    if (studentRepository.existsById(nrAlbumu)) {
-        throw new RuntimeException("Student z numerem albumu " + nrAlbumu + " już istnieje!");
-    }
-
-    // Reszta Twojego dotychczasowego kodu:
-    Kierunek kierunek = kierunekRepository.findById(nazwaKierunku)
-            .orElseThrow(() -> new RuntimeException("Kierunek nie istnieje"));
-
-    Student student = new Student();
-    student.setNrAlbumu(nrAlbumu);
-    student.setImie(imie);
-    student.setNazwisko(nazwisko);
-    student.setKierunek(kierunek);
-
-    return studentRepository.save(student);
-}
+    
 
     // Scenariusz 1.2: Edycja danych osobowych studenta
     @Transactional
@@ -77,5 +59,22 @@ public Student zarejestrujStudenta(String nrAlbumu, String imie, String nazwisko
 
     public List<Student> pobierzWszystkichStudentow() {
         return studentRepository.findAll();
+    }
+    // Scenariusz 1.1: Rejestracja nowego studenta i przypisanie do kierunku
+    @Transactional
+    public Student zarejestrujStudenta(String nrAlbumu, String imie, String nazwisko, String nazwaKierunku) {
+        if (studentRepository.existsById(nrAlbumu)) {
+            throw new RuntimeException("Student z numerem albumu " + nrAlbumu + " już istnieje!");
+        }
+        Kierunek kierunek = kierunekRepository.findById(nazwaKierunku)
+                .orElseThrow(() -> new RuntimeException("Kierunek nie istnieje"));
+
+        Student student = new Student();
+        student.setNrAlbumu(nrAlbumu);
+        student.setImie(imie);
+        student.setNazwisko(nazwisko);
+        student.setKierunek(kierunek);
+
+        return studentRepository.save(student);
     }
 }
