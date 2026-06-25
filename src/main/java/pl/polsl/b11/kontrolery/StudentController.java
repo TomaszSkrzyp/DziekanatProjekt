@@ -1,5 +1,8 @@
 package pl.polsl.b11.kontrolery;
 
+import jakarta.validation.Valid;
+import pl.polsl.b11.dto.RejestracjaStudentaDto;
+import pl.polsl.b11.dto.EdycjaStudentaDto;
 import pl.polsl.b11.encje.Ocena;
 import pl.polsl.b11.encje.Student;
 import pl.polsl.b11.service.StudentService;
@@ -18,21 +21,16 @@ public class StudentController {
 
     // POST http://localhost:8080/api/studenci
     @PostMapping
-    public ResponseEntity<Student> zarejestrujStudenta(
-            @RequestParam String nrAlbumu,
-            @RequestParam String imie,
-            @RequestParam String nazwisko,
-            @RequestParam String nazwaKierunku) {
-        return ResponseEntity.ok(studentService.zarejestrujStudenta(nrAlbumu, imie, nazwisko, nazwaKierunku));
+    public ResponseEntity<Student> zarejestrujStudenta(@Valid @RequestBody RejestracjaStudentaDto dto) {
+        return ResponseEntity.ok(studentService.zarejestrujStudenta(dto));
     }
 
     // PUT http://localhost:8080/api/studenci/{nrAlbumu}
     @PutMapping("/{nrAlbumu}")
     public ResponseEntity<Student> edytujDaneStudenta(
             @PathVariable String nrAlbumu,
-            @RequestParam String imie,
-            @RequestParam String nazwisko) {
-        return ResponseEntity.ok(studentService.edytujDaneStudenta(nrAlbumu, imie, nazwisko));
+            @Valid @RequestBody EdycjaStudentaDto dto) {
+        return ResponseEntity.ok(studentService.edytujDaneStudenta(nrAlbumu, dto));
     }
 
     // GET http://localhost:8080/api/studenci/{nrAlbumu}

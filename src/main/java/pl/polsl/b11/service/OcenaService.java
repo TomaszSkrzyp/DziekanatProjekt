@@ -1,5 +1,7 @@
 package pl.polsl.b11.service;
 
+import pl.polsl.b11.dto.WystawienieOcenyDto;
+import pl.polsl.b11.dto.KorektaOcenyDto;
 import pl.polsl.b11.encje.Ocena;
 import pl.polsl.b11.encje.Student;
 import pl.polsl.b11.encje.Przedmiot;
@@ -23,17 +25,17 @@ public class OcenaService {
 
     // Scenariusz 3.1: Wystawienie oceny
     @Transactional
-    public Ocena wystawOcene(String nrAlbumu, Integer idPrzedmiotu, Float wartosc) {
-        Student student = studentRepository.findById(nrAlbumu)
+    public Ocena wystawOcene(WystawienieOcenyDto dto) {
+        Student student = studentRepository.findById(dto.getNrAlbumu())
                 .orElseThrow(() -> new RuntimeException("Student nie istnieje"));
 
-        Przedmiot przedmiot = przedmiotRepository.findById(idPrzedmiotu)
+        Przedmiot przedmiot = przedmiotRepository.findById(dto.getIdPrzedmiotu())
                 .orElseThrow(() -> new RuntimeException("Przedmiot nie istnieje"));
 
         Ocena ocena = new Ocena();
         ocena.setStudent(student);
         ocena.setPrzedmiot(przedmiot);
-        ocena.setWartosc(wartosc);
+        ocena.setWartosc(dto.getWartosc());
         ocena.setDataWystawienia(LocalDate.now());
 
         return ocenaRepository.save(ocena);
@@ -41,11 +43,11 @@ public class OcenaService {
 
     // Scenariusz 3.2: Korekta oceny
     @Transactional
-    public Ocena zmienWartoscOceny(Integer idOceny, Float nowaWartosc) {
+    public Ocena zmienWartoscOceny(Integer idOceny, KorektaOcenyDto dto) {
         Ocena ocena = ocenaRepository.findById(idOceny)
                 .orElseThrow(() -> new RuntimeException("Ocena nie istnieje"));
         
-        ocena.setWartosc(nowaWartosc);
+        ocena.setWartosc(dto.getNowaWartosc());
         ocena.setDataWystawienia(LocalDate.now()); 
         return ocenaRepository.save(ocena);
     }

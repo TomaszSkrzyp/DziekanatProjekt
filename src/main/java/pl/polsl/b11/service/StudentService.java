@@ -1,5 +1,7 @@
 package pl.polsl.b11.service;
 
+import pl.polsl.b11.dto.RejestracjaStudentaDto;
+import pl.polsl.b11.dto.EdycjaStudentaDto;
 import pl.polsl.b11.encje.Kierunek;
 import pl.polsl.b11.encje.Ocena;
 import pl.polsl.b11.encje.Student;
@@ -18,21 +20,35 @@ import java.util.List;
 public class StudentService {
 
     private final StudentRepository studentRepository;
-
     private final KierunekRepository kierunekRepository;
-
     private final OcenaRepository ocenaRepository;
 
-    
+    // Scenariusz 1.1: Rejestracja nowego studenta i przypisanie do kierunku
+    @Transactional
+    public Student zarejestrujStudenta(RejestracjaStudentaDto dto) {
+        if (studentRepository.existsById(dto.getNrAlbumu())) {
+            throw new RuntimeException("Student z numerem albumu " + dto.getNrAlbumu() + " już istnieje!");
+        }
+        Kierunek kierunek = kierunekRepository.findById(dto.getNazwaKierunku())
+                .orElseThrow(() -> new RuntimeException("Kierunek nie istnieje"));
+
+        Student student = new Student();
+        student.setNrAlbumu(dto.getNrAlbumu());
+        student.setImie(dto.getImie());
+        student.setNazwisko(dto.getNazwisko());
+        student.setKierunek(kierunek);
+
+        return studentRepository.save(student);
+    }
 
     // Scenariusz 1.2: Edycja danych osobowych studenta
     @Transactional
-    public Student edytujDaneStudenta(String nrAlbumu, String noweImie, String noweNazwisko) {
+    public Student edytujDaneStudenta(String nrAlbumu, EdycjaStudentaDto dto) {
         Student student = studentRepository.findById(nrAlbumu)
                 .orElseThrow(() -> new RuntimeException("Nie znaleziono studenta o numerze albumu: " + nrAlbumu));
 
-        student.setImie(noweImie);
-        student.setNazwisko(noweNazwisko);
+        student.setImie(dto.getImie());
+        student.setNazwisko(dto.getNazwisko());
 
         return studentRepository.save(student);
     }
@@ -57,24 +73,8 @@ public class StudentService {
         return ocenaRepository.findByStudentNrAlbumu(nrAlbumu);
     }
 
+    //pobranie listy wszystkich studentow
     public List<Student> pobierzWszystkichStudentow() {
         return studentRepository.findAll();
-    }
-    // Scenariusz 1.1: Rejestracja nowego studenta i przypisanie do kierunku
-    @Transactional
-    public Student zarejestrujStudenta(String nrAlbumu, String imie, String nazwisko, String nazwaKierunku) {
-        if (studentRepository.existsById(nrAlbumu)) {
-            throw new RuntimeException("Student z numerem albumu " + nrAlbumu + " już istnieje!");
-        }
-        Kierunek kierunek = kierunekRepository.findById(nazwaKierunku)
-                .orElseThrow(() -> new RuntimeException("Kierunek nie istnieje"));
-
-        Student student = new Student();
-        student.setNrAlbumu(nrAlbumu);
-        student.setImie(imie);
-        student.setNazwisko(nazwisko);
-        student.setKierunek(kierunek);
-
-        return studentRepository.save(student);
     }
 }

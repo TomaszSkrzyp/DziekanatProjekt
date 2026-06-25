@@ -1,5 +1,8 @@
 package pl.polsl.b11.kontrolery;
 
+import jakarta.validation.Valid;
+import pl.polsl.b11.dto.WystawienieOcenyDto;
+import pl.polsl.b11.dto.KorektaOcenyDto;
 import pl.polsl.b11.encje.Ocena;
 import pl.polsl.b11.service.OcenaService;
 import lombok.RequiredArgsConstructor;
@@ -17,19 +20,16 @@ public class OcenaController {
 
     // POST http://localhost:8080/api/oceny
     @PostMapping
-    public ResponseEntity<Ocena> wystawOcene(
-            @RequestParam String nrAlbumu,
-            @RequestParam Integer idPrzedmiotu,
-            @RequestParam Float wartosc) {
-        return ResponseEntity.ok(ocenaService.wystawOcene(nrAlbumu, idPrzedmiotu, wartosc));
+    public ResponseEntity<Ocena> wystawOcene(@Valid @RequestBody WystawienieOcenyDto dto) {
+        return ResponseEntity.ok(ocenaService.wystawOcene(dto));
     }
 
     // PUT http://localhost:8080/api/oceny/{idOceny}
     @PutMapping("/{idOceny}")
     public ResponseEntity<Ocena> zmienWartoscOceny(
             @PathVariable Integer idOceny,
-            @RequestParam Float nowaWartosc) {
-        return ResponseEntity.ok(ocenaService.zmienWartoscOceny(idOceny, nowaWartosc));
+            @Valid @RequestBody KorektaOcenyDto dto) {
+        return ResponseEntity.ok(ocenaService.zmienWartoscOceny(idOceny, dto));
     }
 
     // DELETE http://localhost:8080/api/oceny/{idOceny}
@@ -48,8 +48,8 @@ public class OcenaController {
     // GET http://localhost:8080/api/oceny/student/{nrAlbumu}/srednia?idPrzedmiotu=1
     @GetMapping("/student/{nrAlbumu}/srednia")
     public ResponseEntity<Double> pobierzSredniaStudenta(
-        @PathVariable String nrAlbumu,
-        @RequestParam(required = false) Integer idPrzedmiotu) {
+            @PathVariable String nrAlbumu,
+            @RequestParam(required = false) Integer idPrzedmiotu) {
         return ResponseEntity.ok(ocenaService.obliczSredniaStudenta(nrAlbumu, idPrzedmiotu));
     }
 
