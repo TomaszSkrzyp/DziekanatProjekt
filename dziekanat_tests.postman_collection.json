@@ -8,9 +8,23 @@
 			"name": "Dodaj Kierunek",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nazwaKierunku\": \"Informatyka\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/program/kierunki?nazwaKierunku=Informatyka",
+					"raw": "http://localhost:8080/api/program/kierunki",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,12 +34,6 @@
 						"api",
 						"program",
 						"kierunki"
-					],
-					"query": [
-						{
-							"key": "nazwaKierunku",
-							"value": "Informatyka"
-						}
 					]
 				}
 			},
@@ -35,9 +43,23 @@
 			"name": "Dodaj Prowadzacego",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"imie\": \"Jan\",\n  \"nazwisko\": \"Kowalski\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/program/prowadzacy?imie=Jan&nazwisko=Kowalski",
+					"raw": "http://localhost:8080/api/program/prowadzacy",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -47,16 +69,6 @@
 						"api",
 						"program",
 						"prowadzacy"
-					],
-					"query": [
-						{
-							"key": "imie",
-							"value": "Jan"
-						},
-						{
-							"key": "nazwisko",
-							"value": "Kowalski"
-						}
 					]
 				}
 			},
@@ -66,9 +78,23 @@
 			"name": "Zarejestruj Studenta",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nrAlbumu\": \"123456\",\n  \"imie\": \"Tomasz\",\n  \"nazwisko\": \"Skrzyp\",\n  \"nazwaKierunku\": \"Informatyka\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/studenci?nrAlbumu=123456&imie=Tomasz&nazwisko=Skrzyp&nazwaKierunku=Informatyka",
+					"raw": "http://localhost:8080/api/studenci",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -77,24 +103,6 @@
 					"path": [
 						"api",
 						"studenci"
-					],
-					"query": [
-						{
-							"key": "nrAlbumu",
-							"value": "123456"
-						},
-						{
-							"key": "imie",
-							"value": "Tomasz"
-						},
-						{
-							"key": "nazwisko",
-							"value": "Skrzyp"
-						},
-						{
-							"key": "nazwaKierunku",
-							"value": "Informatyka"
-						}
 					]
 				}
 			},
@@ -125,9 +133,23 @@
 			"name": "Rejestracja Przedmiotu",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nazwaPrzedmiotu\": \"take\",\n  \"nazwaKierunku\": \"Informatyka\",\n  \"idKierownika\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/program/przedmioty?nazwaPrzedmiotu=take&nazwaKierunku=Informatyka&idKierownika=1",
+					"raw": "http://localhost:8080/api/program/przedmioty",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -137,20 +159,6 @@
 						"api",
 						"program",
 						"przedmioty"
-					],
-					"query": [
-						{
-							"key": "nazwaPrzedmiotu",
-							"value": "take"
-						},
-						{
-							"key": "nazwaKierunku",
-							"value": "Informatyka"
-						},
-						{
-							"key": "idKierownika",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -160,9 +168,23 @@
             "name": "Przypisz Prowadzacego do Przedmiotu",
             "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"idProwadzacego\": 2\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
                 "url": {
-                    "raw": "http://localhost:8080/api/program/przedmioty/:idPrzedmiotu/prowadzacy?idProwadzacego=2",
+                    "raw": "http://localhost:8080/api/program/przedmioty/1/prowadzacy",
                     "protocol": "http",
                     "host": [
                         "localhost"
@@ -172,20 +194,8 @@
                         "api",
                         "program",
                         "przedmioty",
-                        ":idPrzedmiotu",
+                        "1",
                         "prowadzacy"
-                    ],
-                    "query": [
-                        {
-                            "key": "idProwadzacego",
-                            "value": "2"
-                        }
-                    ],
-                    "variable": [
-                        {
-                            "key": "idPrzedmiotu",
-                            "value": ""
-                        }
                     ]
                 }
             },
@@ -195,9 +205,23 @@
 			"name": "Wystaw Ocene",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nrAlbumu\": \"123456\",\n  \"idPrzedmiotu\": 1,\n  \"wartosc\": 4.5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/oceny?nrAlbumu=123456&idPrzedmiotu=1&wartosc=4.5",
+					"raw": "http://localhost:8080/api/oceny",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -206,20 +230,6 @@
 					"path": [
 						"api",
 						"oceny"
-					],
-					"query": [
-						{
-							"key": "nrAlbumu",
-							"value": "123456"
-						},
-						{
-							"key": "idPrzedmiotu",
-							"value": "1"
-						},
-						{
-							"key": "wartosc",
-							"value": "4.5"
-						}
 					]
 				}
 			},
@@ -251,9 +261,23 @@
 			"name": "Zmien Wystawiona Ocenę",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nowaWartosc\": 5.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/api/oceny/1?nowaWartosc=5.0",
+					"raw": "http://localhost:8080/api/oceny/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -263,12 +287,6 @@
 						"api",
 						"oceny",
 						"1"
-					],
-					"query": [
-						{
-							"key": "nowaWartosc",
-							"value": "5.0"
-						}
 					]
 				}
 			},
